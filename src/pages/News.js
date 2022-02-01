@@ -5,6 +5,8 @@ import Article from '../components/Article';
 const News = () => {
 
   const [newsData, setNewsData] = useState([]);
+  const [author, setAuthor] = useState("");
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     getData();
@@ -16,6 +18,15 @@ const News = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    axios.post('http://localhost:3003/articles', {
+      author,
+      content,
+      date: Date.now(),
+    }).then(() => {
+      setAuthor("");
+      setContent("");
+    });
   };
 
   return (
@@ -23,8 +34,8 @@ const News = () => {
       <h1>News</h1>
 
       <form onSubmit={(e) => handleSubmit(e)}>
-        <input type='text' placeholder='Nom' />
-        <textarea placeholder='Message'></textarea>
+        <input onChange={(e) => setAuthor(e.target.value)} type='text' placeholder='Nom' value={author} />
+        <textarea onChange={(e) => setContent(e.target.value)} placeholder='Message' value={content}></textarea>
         <input type="submit" value="Envoyer" />
       </form>
 

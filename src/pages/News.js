@@ -14,7 +14,7 @@ const News = () => {
   }, []);
 
   const getData = () => {
-    axios.get('http://localhost:3003/articles').then((res) => setNewsData(res.data));
+    axios.get('https://react-app-news-kotcherga.herokuapp.com/articles').then((res) => setNewsData(res.data));
   };
 
   const handleSubmit = (e) => {
@@ -23,7 +23,7 @@ const News = () => {
     if (content.length < 20) {
         setError(true);
     } else {
-      axios.post('http://localhost:3003/articles', {
+      axios.post('https://react-app-news-kotcherga.herokuapp.com/articles', {
         author,
         content,
         date: Date.now(),
